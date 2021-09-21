@@ -18,8 +18,6 @@ public class User {
         this.name = name;
         this.date = date;
         this.time = time;
-        String newTime = this.time.substring(0, 2) + ':' + this.time.substring(2);
-        this.time = newTime;
     }
 
     /**

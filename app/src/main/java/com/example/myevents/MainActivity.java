@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * The MainActivity class defines the mainline logic of this application
  */
@@ -38,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.button);
         btnView = findViewById(R.id.button2);
 
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        date = sdf.format(today.getTime());
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView,
@@ -47,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 if (true_month < 10) {
                     monthString = "0" + monthString;
                 }
-                date = String.valueOf(year) + monthString + String.valueOf(day);
+                date = String.valueOf(year) + '-' + monthString + '-' + String.valueOf(day);
             }
         });
 
@@ -69,17 +76,19 @@ public class MainActivity extends AppCompatActivity {
         /**
          * This function saves data like name, date, and time data using SQLite
          */
+        Toast.makeText(MainActivity.this, "" + date,
+                Toast.LENGTH_LONG).show();
         int old_hour = timePicker.getHour();
         String hour = String.valueOf(old_hour);
         if (old_hour < 10) {
             hour = "0" + hour;
         }
         int old_minute = timePicker.getMinute();
-        String minute = String.valueOf(old_hour);
+        String minute = String.valueOf(old_minute);
         if (old_minute < 10) {
             minute = "0" + minute;
         }
-        String time = hour + minute;
+        String time = hour + ':' + minute;
         String name = editText.getText().toString();
         boolean insert = dbHelper.addData(name, date, time);
         if (insert) {
