@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyEvents</string>
+    <string name="time">time</string>
+    <string name="save_event">save event</string>
+    <string name="name_of_event">name of event</string>
+    <string name="see_all_my_events">See all my events</string>
+
+</resources>
